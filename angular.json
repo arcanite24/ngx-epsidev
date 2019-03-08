@@ -133,6 +133,41 @@
           }
         }
       }
+    },
+    "Helios": {
+      "root": "projects/helios",
+      "sourceRoot": "projects/helios/src",
+      "projectType": "library",
+      "prefix": "helios",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/helios/tsconfig.lib.json",
+            "project": "projects/helios/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/helios/src/test.ts",
+            "tsConfig": "projects/helios/tsconfig.spec.json",
+            "karmaConfig": "projects/helios/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/helios/tsconfig.lib.json",
+              "projects/helios/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-epsidev"

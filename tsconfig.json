@@ -24,6 +24,12 @@
       ],
       "helios/*": [
         "dist/helios/*"
+      ],
+      "ngx-dionisio": [
+        "dist/ngx-dionisio"
+      ],
+      "ngx-dionisio/*": [
+        "dist/ngx-dionisio/*"
       ]
     }
   }

@@ -2,12 +2,50 @@
   <div class="row">
 
     <div class="col-md-12">
+      <epsi-ngx-dionisio></epsi-ngx-dionisio>
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="getHello()">Hola Dionisio!</button>
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="getCollection()">Get Collection</button>
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="getDoc()">Get Doc</button>
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="addDoc()">Add Doc</button>
+    </div>
+
+    <div class="col-md-12 form-group">
+      <input type="text" placeholder="Query" [(ngModel)]="search" class="form-control">
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="queryCollection()">Query Collection</button>
+    </div>
+
+    <div class="col-md-12">
+      <ul class="list-group" *ngIf="todos$ | async as todos">
+        <li *ngFor="let todo of todos">
+          <span>{{todo.text}}</span>
+          <button class="btn btn-danger" (click)="deleteDoc(todo.id)">Delete</button>
+          <button class="btn btn-info" (click)="updateDoc(todo.id)">Set Random Text</button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <div class="col-md-12">
       <helios-smart-form #testForm [config]="config" (heliosSubmit)="onSubmit($event)"></helios-smart-form>
     </div>
 
     <div class="col-md-12">
       <button (click)="setRandomPass()">Set Random Password</button>
-    </div>
+    </div> -->
 
     <div class="col-md-12">
       <router-outlet></router-outlet>

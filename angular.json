@@ -203,6 +203,41 @@
           }
         }
       }
+    },
+    "prometheus": {
+      "root": "projects/prometheus",
+      "sourceRoot": "projects/prometheus/src",
+      "projectType": "library",
+      "prefix": "prometheus",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/prometheus/tsconfig.lib.json",
+            "project": "projects/prometheus/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/prometheus/src/test.ts",
+            "tsConfig": "projects/prometheus/tsconfig.spec.json",
+            "karmaConfig": "projects/prometheus/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/prometheus/tsconfig.lib.json",
+              "projects/prometheus/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-epsidev"

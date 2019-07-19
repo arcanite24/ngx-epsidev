@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { HeliosSmartFormConfig, HeliosSmartFormTypes } from 'helios';
 import { of, Observable } from 'rxjs';
 import { SmartFormComponent } from 'helios';
-import { DionisioService } from 'ngx-dionisio';
-import { Socket } from 'ngx-socket-io';
+import { PrometheusTableConfig, PrometheusFieldType } from 'projects/prometheus/src/models/prometheus.models';
+/* import { DionisioService } from 'ngx-dionisio'; */
 
 @Component({
   selector: 'epsidev-root',
@@ -12,7 +12,21 @@ import { Socket } from 'ngx-socket-io';
 })
 export class AppComponent {
 
-  @ViewChild('testForm')
+  public config: PrometheusTableConfig<Todo> = {
+    collection: 'todo',
+    dataSource: of([
+      { id: 1, text: 'Test 1' },
+      { id: 1, text: 'Test 2' },
+      { id: 1, text: 'Test 3' },
+      { id: 1, text: 'Test 4' },
+    ]),
+    headers: [
+      { type: PrometheusFieldType.Text, name: 'id', label: 'ID' },
+      { type: PrometheusFieldType.Text, name: 'text', label: 'Texto' },
+    ]
+  };
+
+  /* @ViewChild('testForm')
   private form: SmartFormComponent;
 
   public config: HeliosSmartFormConfig<TestForm> = {
@@ -47,17 +61,20 @@ export class AppComponent {
     showFormValue: true,
   };
 
+  public key = 'TODO_NEW';
+
   public todos$: Observable<Todo[]> = this.dionisio.collection<Todo>('todo').valueChanges();
+  public query$: Observable<Todo[]> = this.dionisio.collection<Todo>('todo').queryValueChanges({ type: 'new'}, this.key);
   public search: string;
+  public text: string; */
 
   constructor(
-    private dionisio: DionisioService,
-    private socket: Socket,
+    /* private dionisio: DionisioService, */
   ) {
 
   }
 
-  onSubmit(data: any) {
+  /* onSubmit(data: any) {
     console.log(data);
   }
 
@@ -83,7 +100,7 @@ export class AppComponent {
   }
 
   async addDoc() {
-    const added = await this.dionisio.collection<Todo>('todo').add({ text: `Todo Random: ${Date.now()}` });
+    const added = await this.dionisio.collection<Todo>('todo').add({ text: this.text, type: 'default' });
     console.log(added);
   }
 
@@ -93,7 +110,7 @@ export class AppComponent {
   }
 
   async updateDoc(id: number) {
-    const updated = await this.dionisio.doc('todo', id).update({ text: 'Nuevo Todo:' + Date.now() });
+    const updated = await this.dionisio.doc('todo', id).update({ text: this.text });
     console.log(updated);
   }
 
@@ -101,6 +118,27 @@ export class AppComponent {
     const results = await this.dionisio.collection<Todo>('todo').query({ text: this.search });
     console.log(results);
   }
+
+  async addDocKey() {
+    const added = await this.dionisio.collection<Todo>('todo').add({ text: this.text, type: 'default' }, this.key);
+    console.log(added);
+  }
+
+
+  async deleteDocKey(id: number) {
+    const deleted = await this.dionisio.doc('todo', id).delete(this.key);
+    console.log(deleted);
+  }
+
+  async updateDocKey(id: number) {
+    const updated = await this.dionisio.doc('todo', id).update({ text: this.text }, this.key);
+    console.log(updated);
+  }
+
+  async modifyDoc(id: number, field: string, key?: string) {
+    const modified = await this.dionisio.doc('todo', id).modifyValue({ field, delta: 1 }, key);
+    console.log(modified);
+  } */
 
 }
 
@@ -113,11 +151,6 @@ interface TestForm {
   archivo: string;
   archivo2: string;
   lawea?: string;
-}
-
-interface Todo {
-  id: number;
-  text: string;
 }
 
 interface Todo {

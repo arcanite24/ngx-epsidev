@@ -30,6 +30,12 @@
       ],
       "ngx-dionisio/*": [
         "dist/ngx-dionisio/*"
+      ],
+      "prometheus": [
+        "dist/prometheus"
+      ],
+      "prometheus/*": [
+        "dist/prometheus/*"
       ]
     }
   }

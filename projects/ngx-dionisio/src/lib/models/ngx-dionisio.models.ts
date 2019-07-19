@@ -18,16 +18,18 @@ export interface DionisioHello {
 export interface DionisioCollection<T = any> {
   path: string;
   get: () => Promise<T>;
-  add: (payload: any) => Promise<any>;
+  add: (payload: any, key?: string) => Promise<any>;
   query: (payload: any) => Promise<T>;
   valueChanges: () => Observable<T>;
+  queryValueChanges: (payload: any, key: string) => Observable<T>;
 }
 
 export interface DionisioDocument<T = any> {
   path: string;
   get: () => Promise<T>;
-  delete: () => Promise<any>;
-  update: (payload: any) => Promise<any>;
+  delete: (key?: string) => Promise<any>;
+  update: (payload: any, key?: string) => Promise<any>;
+  modifyValue: (payload: DionisioModifyValue, key?: string) => Promise<any>;
 }
 
 export interface DionisioChange {
@@ -36,8 +38,14 @@ export interface DionisioChange {
   payload: any;
 }
 
+export interface DionisioModifyValue {
+  field: string;
+  delta: number;
+}
+
 export enum DionisioChangeTypes {
   Create = 'CREATE',
   Delete = 'DELETE',
   Update = 'UPDATE',
+  Modify = 'MODIFY',
 }

@@ -9,6 +9,10 @@ import { NgxDionisioModule } from 'ngx-dionisio';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
+// Prometheus
+import { PrometheusModule, DionisioAdapter } from 'prometheus';
+import { NestAdapter } from './nest.adapter';
+
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -19,13 +23,19 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HeliosModule.forRoot({
+    /* HeliosModule.forRoot({
       fileUploaderHandler: WeaService.fileUploader
     }),
     NgxDionisioModule.forRoot({
       base_url: 'http://localhost:3000'
+    }), */
+    PrometheusModule.forRoot({
+      adapter: new DionisioAdapter({
+        baseURL: 'https://localhost:3000'
+      }),
     }),
-    SocketIoModule.forRoot(config),
+
+    // SocketIoModule.forRoot(config),
   ],
   providers: [
     WeaService

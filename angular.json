@@ -238,6 +238,41 @@
           }
         }
       }
+    },
+    "ngx-facturama": {
+      "projectType": "library",
+      "root": "projects/ngx-facturama",
+      "sourceRoot": "projects/ngx-facturama/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-facturama/tsconfig.lib.json",
+            "project": "projects/ngx-facturama/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-facturama/src/test.ts",
+            "tsConfig": "projects/ngx-facturama/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-facturama/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-facturama/tsconfig.lib.json",
+              "projects/ngx-facturama/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-epsidev"

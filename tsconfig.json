@@ -36,6 +36,12 @@
       ],
       "prometheus/*": [
         "dist/prometheus/*"
+      ],
+      "ngx-facturama": [
+        "dist/ngx-facturama"
+      ],
+      "ngx-facturama/*": [
+        "dist/ngx-facturama/*"
       ]
     }
   }
